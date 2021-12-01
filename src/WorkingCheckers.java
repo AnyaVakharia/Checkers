@@ -9,6 +9,7 @@ public class WorkingCheckers {
         drawBoard(board);
 
         //test #2
+        //test #3
 
     }
     public static void drawBoard(int[][] board) {
