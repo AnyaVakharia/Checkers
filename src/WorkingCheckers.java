@@ -7,6 +7,7 @@ public class WorkingCheckers {
 
         int [][] board = new int[8][8];
         drawBoard(board);
+
     }
     public static void drawBoard(int[][] board) {
         StdDraw.setPenColor(StdDraw.BLACK);
