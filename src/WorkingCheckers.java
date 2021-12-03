@@ -4,23 +4,13 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 
-/**
- * This panel  lets two users play checkers against each other.
- * Red always starts the game.  If a player can jump an opponent's
- * piece, then the player must jump.  When a player can make no more
- * moves, the game ends.
+/** Description: This application allows for users to play a checkers game
+ *          against each other. Users are able to choose which checkers
+ *          they desire to move wherever on the board. R
  *
- * The class has a main() routine that lets it be run as a stand-alone
- * application.  The application just opens a window that uses an object
- * of type Checkers as its content pane.
+ *
  */
 public class WorkingCheckers extends JPanel {
-
-    /**
-     * Main routine makes it possible to run Checkers as a stand-alone
-     * application.  Opens a window showing a Checkers panel; the program
-     * ends when the user closes the window.
-     */
     public static void main(String[] args) {
         JFrame window = new JFrame("Checkers");
         WorkingCheckers content = new WorkingCheckers();
