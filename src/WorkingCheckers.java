@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * application.  The application just opens a window that uses an object
  * of type Checkers as its content pane.
  */
-public class Checkers extends JPanel {
+public class WorkingCheckers extends JPanel {
 
     /**
      * Main routine makes it possible to run Checkers as a stand-alone
@@ -23,7 +23,7 @@ public class Checkers extends JPanel {
      */
     public static void main(String[] args) {
         JFrame window = new JFrame("Checkers");
-        Checkers content = new Checkers();
+        WorkingCheckers content = new WorkingCheckers();
         window.setContentPane(content);
         window.pack();
         Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -46,7 +46,7 @@ public class Checkers extends JPanel {
      * the bounds of the components.  A null layout is used.  (This is
      * the only thing that is done in the main Checkers class.)
      */
-    public Checkers() {
+    public WorkingCheckers() {
 
         setLayout(null);  // I will do the layout myself.
         setPreferredSize( new Dimension(350,250) );
