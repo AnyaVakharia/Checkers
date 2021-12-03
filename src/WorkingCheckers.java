@@ -57,10 +57,8 @@ public class WorkingCheckers extends JPanel {
         resignButton.setBounds(210, 120, 120, 30);
         message.setBounds(0, 200, 350, 30);
 
-    } // end constructor
+    }
 
-
-    // --------------------  Nested Classes -------------------------------
 
     // This class allows for checkers to actually move during the game
     private static class CheckersMove {
@@ -79,7 +77,7 @@ public class WorkingCheckers extends JPanel {
         boolean isJump() {
             return (fromRow - toRow == 2 || fromRow - toRow == -2);
         }
-    }  // end class CheckersMove.
+    }
 
 
     // This class designs the actual checkers board with the checkers on it
@@ -197,7 +195,7 @@ public class WorkingCheckers extends JPanel {
 
             message.setText("Click the space you want to move to.");
 
-        }  // end doClickSquare()
+        }
 
 
         // Checker is moved to the specified spot
@@ -259,7 +257,7 @@ public class WorkingCheckers extends JPanel {
             // Board is recreated
             repaint();
 
-        }  // end doMakeMove();
+        }
 
 
        // The actual board is created as well as the checkers that sit on it
@@ -487,8 +485,6 @@ public class WorkingCheckers extends JPanel {
                 }
 
             }
-
-
             /**
              * Return a list of the legal jumps that the specified player can
              * make starting from the specified row and column.  If no such
