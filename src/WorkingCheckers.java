@@ -197,7 +197,7 @@ public class WorkingCheckers extends JPanel {
 
             message.setText("Click the space you want to move to.");
 
-        }  // end doClickSquare()
+        }
 
 
         // Checker is moved to the specified spot
@@ -259,7 +259,7 @@ public class WorkingCheckers extends JPanel {
             // Board is recreated
             repaint();
 
-        }  // end doMakeMove();
+        }
 
 
        // The actual board is created as well as the checkers that sit on it
@@ -489,12 +489,7 @@ public class WorkingCheckers extends JPanel {
             }
 
 
-            /**
-             * Return a list of the legal jumps that the specified player can
-             * make starting from the specified row and column.  If no such
-             * jumps are possible, null is returned.  The logic is similar
-             * to the logic of the getLegalMoves() method.
-             */
+            // Legal jumps are specified and users are able to pursue them
             CheckersMove[] getLegalJumpsFrom(int player, int row, int col) {
                 if (player != RED && player != BLACK)
                     return null;
@@ -522,13 +517,8 @@ public class WorkingCheckers extends JPanel {
                         moveArray[i] = moves.get(i);
                     return moveArray;
                 }
-            }  //
+            }
 
-            /*check whether the player can make a legal jump from (r1, c1) to (r3, c3).
-            Assume that there is already a piece at (r1, c1).
-            Assume that (r3,c3) is a position that is 2 rows and 2 columns distant from (r1,c1).
-            (r2,c2) will be the square in between (r1,c1) and (r3,c3)
-             */
             private boolean canJump(int player, int r1, int c1, int r2, int c2, int r3, int c3) {
 
                 if (r3 < 0 || r3 >= 8 || c3 < 0 || c3 >= 8)
@@ -554,12 +544,7 @@ public class WorkingCheckers extends JPanel {
             }
 
 
-            /*
-             * getLegalMoves() method calls this in order to determine whether a player can legally move
-             from (r1,c1) to (r2,c2).
-             Assume that (r1,r2) contains a player's piece and (r2,c2) is a neighboring square.
-             */
-
+            // Specifies when users can move
             private boolean canMove(int player, int r1, int c1, int r2, int c2) {
 
                 if (r2 < 0 || r2 >= 8 || c2 < 0 || c2 >= 8)
