@@ -4,11 +4,15 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 
-/** Description: This application allows for users to play a checkers game
- *          against each other. Users are able to choose which checkers
- *          they desire to move wherever on the board. When users press
- *          the "resign" button, a winner is given no matter how far along
- *          the game is.
+/** Description: This application allows for users to play a two player
+ *          checkers game. The game begins with checkers in designated spots
+ *          and from there the users are able to move their checkers one by one.
+ *          They can choose which checker they want to move where, as long
+ *          as it is a possible and legal move. Players can jump each other's
+ *          checkers, which will ultimately lead them to winning. While playing,
+ *          users are able to click the "Resign" button which will end the game
+ *          and tell the players who was winning thus far. A "New Game" button
+ *          is also available for user's to restart the game.
  *
  * @ author Tori Brunette, Dane Stewart, and Anya Vakharia
  */
