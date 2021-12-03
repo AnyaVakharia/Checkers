@@ -367,19 +367,20 @@ public class WorkingCheckers extends JPanel {
                 }
             }
          
-         /* If a game is in progress, hilite the legal moves.   Note that legalMoves
-          is never null while a game is in progress. */
+         /* highlight the legal moves if the game is in progress.
+         While a game is in progress, legalMoves can never be null. */
 
             if (gameInProgress) {
-                /* First, draw a 2-pixel cyan border around the pieces that can be moved. */
+                /* Drawing a border around the pieces that can be moved to indicate which color can move. */
                 g.setColor(Color.cyan);
                 for (int i = 0; i < legalMoves.length; i++) {
                     g.drawRect(2 + legalMoves[i].fromCol*20, 2 + legalMoves[i].fromRow*20, 19, 19);
                     g.drawRect(3 + legalMoves[i].fromCol*20, 3 + legalMoves[i].fromRow*20, 17, 17);
                 }
-               /* If a piece is selected for moving (i.e. if selectedRow >= 0), then
-                draw a 2-pixel white border around that piece and draw green borders 
-                around each square that that piece can be moved to. */
+               /* Depending on which piece has been selected, indicate the spaces to which the piece can be
+                moved (if selectedRow >= 0). Drawing a border around that piece and around the square that the piece
+                can be moved to. */
+
                 if (selectedRow >= 0) {
                     g.setColor(Color.white);
                     g.drawRect(2 + selectedCol*20, 2 + selectedRow*20, 19, 19);
@@ -394,13 +395,13 @@ public class WorkingCheckers extends JPanel {
                 }
             }
 
-        }  // end paintComponent()
+        }
 
 
         /**
-         * Respond to a user click on the board.  If no game is in progress, show
-         * an error message.  Otherwise, find the row and column that the user
-         * clicked and call doClickSquare() to handle it.
+         * mousePressed responds to the user clicking a piece or square on the checkers board.
+         * Show an error message if there is no game in progress, otherwise use doClickSquare() to find the
+         * square (by finding the row and the column) that the user picks.
          */
         public void mousePressed(MouseEvent evt) {
             if (gameInProgress == false)
@@ -418,10 +419,6 @@ public class WorkingCheckers extends JPanel {
         public void mouseClicked(MouseEvent evt) { }
         public void mouseEntered(MouseEvent evt) { }
         public void mouseExited(MouseEvent evt) { }
-
-
-    }  // end class Board
-
 
 
     /**
