@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *          the "resign" button, a winner is given no matter how far along
  *          the game is.
  *
+ * @ author Tori Brunette, Dane Stewart, and Anya Vakharia
  */
 public class WorkingCheckers extends JPanel {
     public static void main(String[] args) {
@@ -25,6 +26,7 @@ public class WorkingCheckers extends JPanel {
         window.setVisible(true);
     }
 
+    // Assign all public and private variables
     private JButton newGameButton;  // Button for starting a new game.
     private JButton resignButton;   // Button that a player can use to end
     // the game by resigning.
@@ -38,19 +40,14 @@ public class WorkingCheckers extends JPanel {
 
         setBackground(new Color(0,150,0));  // Dark green background.
 
-        /* Create the components and add them to the applet. */
+        Board board = new Board();
 
-        Board board = new Board();  // Note: The constructor for the
-        //   board also creates the buttons
-        //   and label.
         add(board);
         add(newGameButton);
         add(resignButton);
         add(message);
-      
-      /* Set the position and size of each component by calling
-       its setBounds() method. */
 
+        // Set the position and size of the board by calling the setBounds method
         board.setBounds(20,20,164,164); // Note:  size MUST be 164-by-164 !
         newGameButton.setBounds(210, 60, 120, 30);
         resignButton.setBounds(210, 120, 120, 30);
@@ -61,12 +58,8 @@ public class WorkingCheckers extends JPanel {
 
 
     // --------------------  Nested Classes -------------------------------
-    /**
-     * A CheckersMove object represents a move in the game of Checkers.
-     * It holds the row and column of the piece that is to be moved
-     * and the row and column of the square to which it is to be moved.
-     * (This class makes no guarantee that the move is legal.)
-     */
+
+    // This class allows for checkers to actually move during the game
     private static class CheckersMove {
         int fromRow, fromCol;  // Position of piece to be moved.
         int toRow, toCol;      // Square it is to move to.
@@ -78,9 +71,7 @@ public class WorkingCheckers extends JPanel {
             toCol = c2;
         }
         boolean isJump() {
-            // Test whether this move is a jump.  It is assumed that
-            // the move is legal.  In a jump, the piece moves two
-            // rows.  (In a regular move, it only moves one row.)
+            // Test whether this move is a jump.  It is assumed that the move is allowed
             return (fromRow - toRow == 2 || fromRow - toRow == -2);
         }
     }  // end class CheckersMove.
@@ -94,6 +85,7 @@ public class WorkingCheckers extends JPanel {
      * the work of letting the users play checkers, and it displays
      * the checkerboard.
      */
+    // This class actually designs the checkers board
     private class Board extends JPanel implements ActionListener, MouseListener {
 
 
