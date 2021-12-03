@@ -10,7 +10,6 @@ import java.util.ArrayList;
  *          the "resign" button, a winner is given no matter how far along
  *          the game is.
  *
- *
  */
 public class WorkingCheckers extends JPanel {
     public static void main(String[] args) {
@@ -32,12 +31,6 @@ public class WorkingCheckers extends JPanel {
 
     private JLabel message;  // Label for displaying messages to the user.
 
-    /**
-     * The constructor creates the Board (which in turn creates and manages
-     * the buttons and message label), adds all the components, and sets
-     * the bounds of the components.  A null layout is used.  (This is
-     * the only thing that is done in the main Checkers class.)
-     */
     public WorkingCheckers() {
 
         setLayout(null);  // I will do the layout myself.
@@ -124,11 +117,6 @@ public class WorkingCheckers extends JPanel {
         //   current player.
 
 
-        /**
-         * Constructor.  Create the buttons and label.  Listens for mouse
-         * clicks and for clicks on the buttons.  Create the board and
-         * start the first game.
-         */
         Board() {
             setBackground(Color.BLACK);
             addMouseListener(this);
