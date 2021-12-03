@@ -400,10 +400,6 @@ public class WorkingCheckers extends JPanel {
             }
 
 
-            /* Make the move from (fromRow,fromCol) to (toRow,toCol). If the move invloves a jump, the
-            jumped piece is eliminated from the board.  If a piece moves to
-            the last row on the opposing side of the board, the piece then becomes a king piece. */
-
             void makeMove(int fromRow, int fromCol, int toRow, int toCol) {
                 board[toRow][toCol] = board[fromRow][fromCol];
                 board[fromRow][fromCol] = EMPTY;
@@ -419,9 +415,6 @@ public class WorkingCheckers extends JPanel {
                     board[toRow][toCol] = BLACK_KING;
             }
 
-            /* return an array containing all legal CheckersMoves for designated player.
-            return null if there are no legal moves being made.
-            */
             CheckersMove[] getLegalMoves(int player) {
 
                 if (player != RED && player != BLACK)
@@ -434,11 +427,6 @@ public class WorkingCheckers extends JPanel {
                     playerKing = BLACK_KING;
 
                 ArrayList<CheckersMove> moves = new ArrayList<CheckersMove>();  // Moves will be stored in this list.
-         
-         /*  check for all possible jumps by checking each square.
-          If a square contains a piece, look at all possible jumps in all four directions of that square.
-          If a legal jump exists, put it in the moves ArrayList.
-          */
 
                 for (int row = 0; row < 8; row++) {
                     for (int col = 0; col < 8; col++) {
@@ -472,10 +460,6 @@ public class WorkingCheckers extends JPanel {
                         }
                     }
                 }
-         
-         /* return null if no legal moves are found.
-         else, create an array big enough to hold all the legal moves, copy the
-          legal moves from the ArrayList into the array, and return the array. */
 
                 if (moves.size() == 0)
                     return null;
@@ -488,13 +472,7 @@ public class WorkingCheckers extends JPanel {
 
             }
 
-
-            /**
-             * Return a list of the legal jumps that the specified player can
-             * make starting from the specified row and column.  If no such
-             * jumps are possible, null is returned.  The logic is similar
-             * to the logic of the getLegalMoves() method.
-             */
+            // Specify when a user can jump legally
             CheckersMove[] getLegalJumpsFrom(int player, int row, int col) {
                 if (player != RED && player != BLACK)
                     return null;
@@ -522,13 +500,9 @@ public class WorkingCheckers extends JPanel {
                         moveArray[i] = moves.get(i);
                     return moveArray;
                 }
-            }  //
+            }
 
-            /*check whether the player can make a legal jump from (r1, c1) to (r3, c3).
-            Assume that there is already a piece at (r1, c1).
-            Assume that (r3,c3) is a position that is 2 rows and 2 columns distant from (r1,c1).
-            (r2,c2) will be the square in between (r1,c1) and (r3,c3)
-             */
+            // Specifies where users can jump
             private boolean canJump(int player, int r1, int c1, int r2, int c2, int r3, int c3) {
 
                 if (r3 < 0 || r3 >= 8 || c3 < 0 || c3 >= 8)
@@ -553,13 +527,7 @@ public class WorkingCheckers extends JPanel {
 
             }
 
-
-            /*
-             * getLegalMoves() method calls this in order to determine whether a player can legally move
-             from (r1,c1) to (r2,c2).
-             Assume that (r1,r2) contains a player's piece and (r2,c2) is a neighboring square.
-             */
-
+            // Specify when users can move their checkers
             private boolean canMove(int player, int r1, int c1, int r2, int c2) {
 
                 if (r2 < 0 || r2 >= 8 || c2 < 0 || c2 >= 8)
