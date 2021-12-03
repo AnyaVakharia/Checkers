@@ -346,47 +346,27 @@ public class WorkingCheckers extends JPanel {
         public void mouseExited(MouseEvent evt) {
         }
 
-
-        /**
-         * An object of this class holds data about a game of checkers.
-         * It knows what kind of piece is on each square of the checkerboard.
-         * Note that RED moves "up" the board (i.e. row number decreases)
-         * while BLACK moves "down" the board (i.e. row number increases).
-         * Methods are provided to return lists of available legal moves.
-         */
         private static class CheckersData {
-      
-      /*  The following constants represent the possible contents of a square
-          on the board.  The constants RED and BLACK also represent players
-          in the game. */
 
+       //RED pieces move upwards while BLACK pieces move downwards on the board.
             static final int
-                    EMPTY = 0,
-                    RED = 1,
-                    RED_KING = 2,
-                    BLACK = 3,
-                    BLACK_KING = 4;
+              EMPTY = 0,
+              RED = 1,
+              RED_KING = 2,
+              BLACK = 3,
+              BLACK_KING = 4;
 
 
-            int[][] board;  // board[r][c] is the contents of row r, column c.
+            int[][] board;  // board[r][c] represents the row (r), and column (c).
 
 
-            /**
-             * Constructor.  Create the board and set it up for a new game.
-             */
+           // new constructor
             CheckersData() {
                 board = new int[8][8];
                 setUpGame();
             }
 
-
-            /**
-             * Set up the board with checkers in position for the beginning
-             * of a game.  Note that checkers can only be found in squares
-             * that satisfy  row % 2 == col % 2.  At the start of the game,
-             * all such squares in the first three rows contain black squares
-             * and all such squares in the last three rows contain red squares.
-             */
+            //checkers can only occur in squares such that row % 2 == col % 2.
             void setUpGame() {
                 for (int row = 0; row < 8; row++) {
                     for (int col = 0; col < 8; col++) {
@@ -402,40 +382,31 @@ public class WorkingCheckers extends JPanel {
                         }
                     }
                 }
-            }  // end setUpGame()
+            }
 
-
-            /**
-             * Return the contents of the square in the specified row and column.
-             */
             int pieceAt(int row, int col) {
                 return board[row][col];
             }
 
 
-            /**
-             * Make the specified move.  It is assumed that move
-             * is non-null and that the move it represents is legal.
-             */
+            //assume that move is legal.
+
             void makeMove(CheckersMove move) {
                 makeMove(move.fromRow, move.fromCol, move.toRow, move.toCol);
             }
 
 
-            /**
-             * Make the move from (fromRow,fromCol) to (toRow,toCol).  It is
-             * assumed that this move is legal.  If the move is a jump, the
-             * jumped piece is removed from the board.  If a piece moves to
-             * the last row on the opponent's side of the board, the
-             * piece becomes a king.
-             */
+            /* Make the move from (fromRow,fromCol) to (toRow,toCol). If the move invloves a jump, the
+            jumped piece is eliminated from the board.  If a piece moves to
+            the last row on the opposing side of the board, the piece then becomes a king piece. */
+
             void makeMove(int fromRow, int fromCol, int toRow, int toCol) {
                 board[toRow][toCol] = board[fromRow][fromCol];
                 board[fromRow][fromCol] = EMPTY;
                 if (fromRow - toRow == 2 || fromRow - toRow == -2) {
-                    // The move is a jump.  Remove the jumped piece from the board.
-                    int jumpRow = (fromRow + toRow) / 2;  // Row of the jumped piece.
-                    int jumpCol = (fromCol + toCol) / 2;  // Column of the jumped piece.
+                    // Removing the jumped piece.
+                    int jumpRow = (fromRow + toRow) / 2;  // Row of jumped piece.
+                    int jumpCol = (fromCol + toCol) / 2;  // Column of jumped piece.
                     board[jumpRow][jumpCol] = EMPTY;
                 }
                 if (toRow == 0 && board[toRow][toCol] == RED)
@@ -444,15 +415,9 @@ public class WorkingCheckers extends JPanel {
                     board[toRow][toCol] = BLACK_KING;
             }
 
-            /**
-             * Return an array containing all the legal CheckersMoves
-             * for the specified player on the current board.  If the player
-             * has no legal moves, null is returned.  The value of player
-             * should be one of the constants RED or BLACK; if not, null
-             * is returned.  If the returned value is non-null, it consists
-             * entirely of jump moves or entirely of regular moves, since
-             * if the player can jump, only jumps are legal moves.
-             */
+            /* return an array containing all legal CheckersMoves for designated player.
+            return null if there are no legal moves being made.
+            */
             CheckersMove[] getLegalMoves(int player) {
 
                 if (player != RED && player != BLACK)
