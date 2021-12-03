@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *          They can choose which checker they want to move where, as long
  *          as it is a possible and legal move. Players can jump each other's
  *          checkers, which will ultimately lead them to winning. While playing,
- *          users are able to click the "Resign" button which will end the game
+ *          users are able to click the "End Game" button which will end the game
  *          and tell the players who was winning thus far. A "New Game" button
  *          is also available for user's to restart the game.
  *
