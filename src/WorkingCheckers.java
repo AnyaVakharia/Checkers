@@ -494,12 +494,12 @@ public class WorkingCheckers extends JPanel {
             CheckersMove[] getLegalJumpsFrom(int player, int row, int col) {
                 if (player != RED && player != BLACK)
                     return null;
-                int playerKing;  // The constant representing a King belonging to player.
+                int playerKing;
                 if (player == RED)
                     playerKing = RED_KING;
                 else
                     playerKing = BLACK_KING;
-                ArrayList<CheckersMove> moves = new ArrayList<CheckersMove>();  // The legal jumps will be stored in this list.
+                ArrayList<CheckersMove> moves = new ArrayList<CheckersMove>();  //legal jumps will be stored in list.
                 if (board[row][col] == player || board[row][col] == playerKing) {
                     if (canJump(player, row, col, row + 1, col + 1, row + 2, col + 2))
                         moves.add(new CheckersMove(row, col, row + 2, col + 2));
@@ -518,7 +518,7 @@ public class WorkingCheckers extends JPanel {
                         moveArray[i] = moves.get(i);
                     return moveArray;
                 }
-            }  // end getLegalMovesFrom()
+            }  //
 
 
             /**
