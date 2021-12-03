@@ -258,19 +258,13 @@ public class WorkingCheckers extends JPanel {
         }  // end doMakeMove();
 
 
-        /**
-         * Draw a checkerboard pattern in gray and lightGray.  Draw the
-         * checkers.  If a game is in progress, hilite the legal moves.
-         */
+       // The actual board is created as well as the checkers that sit on it
         public void paintComponent(Graphics g) {
-
-            /* Draw a two-pixel black border around the edges of the canvas. */
 
             g.setColor(Color.black);
             g.drawRect(0, 0, getSize().width - 1, getSize().height - 1);
             g.drawRect(1, 1, getSize().width - 3, getSize().height - 3);
 
-            /* Draw the squares of the checkerboard and the checkers. */
 
             for (int row = 0; row < 8; row++) {
                 for (int col = 0; col < 8; col++) {
@@ -304,19 +298,13 @@ public class WorkingCheckers extends JPanel {
                 }
             }
          
-         /* highlight the legal moves if the game is in progress.
-         While a game is in progress, legalMoves can never be null. */
 
             if (gameInProgress) {
-                /* Drawing a border around the pieces that can be moved to indicate which color can move. */
                 g.setColor(Color.cyan);
                 for (int i = 0; i < legalMoves.length; i++) {
                     g.drawRect(2 + legalMoves[i].fromCol * 20, 2 + legalMoves[i].fromRow * 20, 19, 19);
                     g.drawRect(3 + legalMoves[i].fromCol * 20, 3 + legalMoves[i].fromRow * 20, 17, 17);
                 }
-               /* Depending on which piece has been selected, indicate the spaces to which the piece can be
-                moved (if selectedRow >= 0). Drawing a border around that piece and around the square that the piece
-                can be moved to. */
 
                 if (selectedRow >= 0) {
                     g.setColor(Color.white);
@@ -334,12 +322,7 @@ public class WorkingCheckers extends JPanel {
 
         }
 
-
-        /**
-         * mousePressed responds to the user clicking a piece or square on the checkers board.
-         * Show an error message if there is no game in progress, otherwise use doClickSquare() to find the
-         * square (by finding the row and the column) that the user picks.
-         */
+        // Responds to the user clicking a specific square that they want their checkers to move
         public void mousePressed(MouseEvent evt) {
             if (gameInProgress == false)
                 message.setText("Click \"New Game\" to start a new game.");
@@ -350,7 +333,6 @@ public class WorkingCheckers extends JPanel {
                     doClickSquare(row, col);
             }
         }
-
 
         public void mouseReleased(MouseEvent evt) {
         }
