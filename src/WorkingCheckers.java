@@ -27,19 +27,19 @@ public class WorkingCheckers extends JPanel {
     }
 
     // Assign all public and private variables
-    private JButton newGameButton;  // Button for starting a new game.
-    private JButton resignButton;   // Button that a player can use to end
-    // the game by resigning.
+    private JButton newGameButton;  // Starts a new game
+    private JButton resignButton;   // End a game
 
-    private JLabel message;  // Label for displaying messages to the user.
+    private JLabel message;  // Displays the messages
 
     public WorkingCheckers() {
 
-        setLayout(null);  // I will do the layout myself.
+        setLayout(null);
         setPreferredSize( new Dimension(350,250) );
 
-        setBackground(new Color(0,150,0));  // Dark green background.
+        setBackground(new Color(0,150,0));  // Background color
 
+        // Board class
         Board board = new Board();
 
         add(board);
@@ -48,7 +48,7 @@ public class WorkingCheckers extends JPanel {
         add(message);
 
         // Set the position and size of the board by calling the setBounds method
-        board.setBounds(20,20,164,164); // Note:  size MUST be 164-by-164 !
+        board.setBounds(20,20,164,164);
         newGameButton.setBounds(210, 60, 120, 30);
         resignButton.setBounds(210, 120, 120, 30);
         message.setBounds(0, 200, 350, 30);
@@ -61,54 +61,38 @@ public class WorkingCheckers extends JPanel {
 
     // This class allows for checkers to actually move during the game
     private static class CheckersMove {
-        int fromRow, fromCol;  // Position of piece to be moved.
-        int toRow, toCol;      // Square it is to move to.
+        int fromRow, fromCol;  // Position
+        int toRow, toCol;
         CheckersMove(int r1, int c1, int r2, int c2) {
-            // Constructor.  Just set the values of the instance variables.
+            // Constructor!
             fromRow = r1;
             fromCol = c1;
             toRow = r2;
             toCol = c2;
         }
+        // Checks if the move is a jump, meaning one checker would go away
         boolean isJump() {
-            // Test whether this move is a jump.  It is assumed that the move is allowed
             return (fromRow - toRow == 2 || fromRow - toRow == -2);
         }
     }  // end class CheckersMove.
 
 
-
-    /**
-     * This panel displays a 160-by-160 checkerboard pattern with
-     * a 2-pixel black border.  It is assumed that the size of the
-     * panel is set to exactly 164-by-164 pixels.  This class does
-     * the work of letting the users play checkers, and it displays
-     * the checkerboard.
-     */
-    // This class actually designs the checkers board
+    // This class designs the actual checkers board with the checkers on it
     private class Board extends JPanel implements ActionListener, MouseListener {
 
 
-        CheckersData board;  // The data for the checkers board is kept here.
-        //    This board is also responsible for generating
-        //    lists of legal moves.
+        CheckersData board;  // Data for the board and moves made on the board
 
-        boolean gameInProgress; // Is a game currently in progress?
+        boolean gameInProgress; // Checks if game is still running
 
-        /* The next three variables are valid only when the game is in progress. */
+        int currentPlayer;      // Checks which player it is
 
-        int currentPlayer;      // Whose turn is it now?  The possible values
-        //    are CheckersData.RED and CheckersData.BLACK.
+        int selectedRow, selectedCol;
 
-        int selectedRow, selectedCol;  // If the current player has selected a piece to
-        //     move, these give the row and column
-        //     containing that piece.  If no piece is
-        //     yet selected, then selectedRow is -1.
-
-        CheckersMove[] legalMoves;  // An array containing the legal moves for the
-        //   current player.
+        CheckersMove[] legalMoves; // Array that checks the moves
 
 
+        // Board method that holds the buttons printed on the board
         Board() {
             setBackground(Color.BLACK);
             addMouseListener(this);
@@ -124,9 +108,7 @@ public class WorkingCheckers extends JPanel {
         }
 
 
-        /**
-         * Respond to user's click on one of the two buttons.
-         */
+        // Records user's clicks
         public void actionPerformed(ActionEvent evt) {
             Object src = evt.getSource();
             if (src == newGameButton)
@@ -136,19 +118,16 @@ public class WorkingCheckers extends JPanel {
         }
 
 
-        /**
-         * Start a new game
-         */
+        // New game is created in this method
         void doNewGame() {
             if (gameInProgress == true) {
-                // This should not be possible, but it doesn't hurt to check.
                 message.setText("Finish the current game first!");
                 return;
             }
-            board.setUpGame();   // Set up the pieces.
-            currentPlayer = CheckersData.RED;   // RED moves first.
-            legalMoves = board.getLegalMoves(CheckersData.RED);  // Get RED's legal moves.
-            selectedRow = -1;   // RED has not yet selected a piece to move.
+            board.setUpGame();   // Sets up pieces
+            currentPlayer = CheckersData.RED;   // Red checker moves first
+            legalMoves = board.getLegalMoves(CheckersData.RED);  // Record Red's moves
+            selectedRow = -1;
             message.setText("Red:  Make your move.");
             gameInProgress = true;
             newGameButton.setEnabled(false);
@@ -157,11 +136,9 @@ public class WorkingCheckers extends JPanel {
         }
 
 
-        /**
-         * Current player resigns.  Game ends.  Opponent wins.
-         */
+        // This method refers to when the player wants to end the game
         void doResign() {
-            if (gameInProgress == false) {  // Should be impossible.
+            if (gameInProgress == false) {
                 message.setText("There is no game in progress!");
                 return;
             }
@@ -172,12 +149,7 @@ public class WorkingCheckers extends JPanel {
         }
 
 
-        /**
-         * The game ends.  The parameter, str, is displayed as a message
-         * to the user.  The states of the buttons are adjusted so players
-         * can start a new game.  This method is called when the game
-         * ends at any point in this class.
-         */
+        // The game ends when this method is used -- No moves are possible
         void gameOver(String str) {
             message.setText(str);
             newGameButton.setEnabled(true);
@@ -186,17 +158,10 @@ public class WorkingCheckers extends JPanel {
         }
 
 
-        /**
-         * This is called by mousePressed() when a player clicks on the
-         * square in the specified row and col.  It has already been checked
-         * that a game is, in fact, in progress.
-         */
+        // Method that allows users to click legal positions and guides them in the process
         void doClickSquare(int row, int col) {
          
-         /* If the player clicked on one of the pieces that the player
-          can move, mark this row and col as selected and return.  (This
-          might change a previous selection.)  Reset the message, in
-          case it was previously displaying an error message. */
+         // If the move is legal, the checker moves
 
             for (int i = 0; i < legalMoves.length; i++)
                 if (legalMoves[i].fromRow == row && legalMoves[i].fromCol == col) {
@@ -209,17 +174,14 @@ public class WorkingCheckers extends JPanel {
                     repaint();
                     return;
                 }
-         
-         /* If no piece has been selected to be moved, the user must first
-          select a piece.  Show an error message and return. */
+
 
             if (selectedRow < 0) {
                 message.setText("Click the piece you want to move.");
                 return;
             }
-         
-         /* If the user clicked on a square where the selected piece can be
-          legally moved, then make the move and return. */
+
+            // Actually move the checker if possible
 
             for (int i = 0; i < legalMoves.length; i++)
                 if (legalMoves[i].fromRow == selectedRow && legalMoves[i].fromCol == selectedCol
@@ -227,31 +189,18 @@ public class WorkingCheckers extends JPanel {
                     doMakeMove(legalMoves[i]);
                     return;
                 }
-         
-         /* If we get to this point, there is a piece selected, and the square where
-          the user just clicked is not one where that piece can be legally moved.
-          Show an error message. */
 
             message.setText("Click the square you want to move to.");
 
         }  // end doClickSquare()
 
 
-        /**
-         * This is called when the current player has chosen the specified
-         * move.  Make the move, and then either end or continue the game
-         * appropriately.
-         */
+        // Checker is moved to the specified spot
         void doMakeMove(CheckersMove move) {
 
             board.makeMove(move);
-         
-         /* If the move was a jump, it's possible that the player has another
-          jump.  Check for legal jumps starting from the square that the player
-          just moved to.  If there are any, the player must jump.  The same
-          player continues moving.
-          */
 
+            // Check if this move was a jump
             if (move.isJump()) {
                 legalMoves = board.getLegalJumpsFrom(currentPlayer,move.toRow,move.toCol);
                 if (legalMoves != null) {
@@ -259,16 +208,12 @@ public class WorkingCheckers extends JPanel {
                         message.setText("RED:  You must continue jumping.");
                     else
                         message.setText("BLACK:  You must continue jumping.");
-                    selectedRow = move.toRow;  // Since only one piece can be moved, select it.
+                    selectedRow = move.toRow;
                     selectedCol = move.toCol;
                     repaint();
                     return;
                 }
             }
-         
-         /* The current player's turn is ended, so change to the other player.
-          Get that player's legal moves.  If the player has no legal moves,
-          then the game ends. */
 
             if (currentPlayer == CheckersData.RED) {
                 currentPlayer = CheckersData.BLACK;
@@ -291,14 +236,8 @@ public class WorkingCheckers extends JPanel {
                     message.setText("RED:  Make your move.");
             }
          
-         /* Set selectedRow = -1 to record that the player has not yet selected
-          a piece to move. */
-
+         // -1 if the player has not selected a move
             selectedRow = -1;
-         
-         /* As a courtesy to the user, if all legal moves use the same piece, then
-          select that piece automatically so the user won't have to click on it
-          to select it. */
 
             if (legalMoves != null) {
                 boolean sameStartSquare = true;
@@ -313,9 +252,7 @@ public class WorkingCheckers extends JPanel {
                     selectedCol = legalMoves[0].fromCol;
                 }
             }
-
-            /* Make sure the board is redrawn in its new state. */
-
+            // Board is recreated
             repaint();
 
         }  // end doMakeMove();
