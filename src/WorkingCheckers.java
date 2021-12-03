@@ -423,7 +423,7 @@ public class WorkingCheckers extends JPanel {
                 if (player != RED && player != BLACK)
                     return null;
 
-                int playerKing;  // The constant representing a King belonging to player.
+                int playerKing;
                 if (player == RED)
                     playerKing = RED_KING;
                 else
@@ -431,10 +431,9 @@ public class WorkingCheckers extends JPanel {
 
                 ArrayList<CheckersMove> moves = new ArrayList<CheckersMove>();  // Moves will be stored in this list.
          
-         /*  First, check for any possible jumps.  Look at each square on the board.
-          If that square contains one of the player's pieces, look at a possible
-          jump in each of the four directions from that square.  If there is 
-          a legal jump in that direction, put it in the moves ArrayList.
+         /*  check for all possible jumps by checking each square.
+          If a square contains a piece, look at all possible jumps in all four directions of that square.
+          If a legal jump exists, put it in the moves ArrayList.
           */
 
                 for (int row = 0; row < 8; row++) {
@@ -452,13 +451,6 @@ public class WorkingCheckers extends JPanel {
                     }
                 }
          
-         /*  If any jump moves were found, then the user must jump, so we don't 
-          add any regular moves.  However, if no jumps were found, check for
-          any legal regular moves.  Look at each square on the board.
-          If that square contains one of the player's pieces, look at a possible
-          move in each of the four directions from that square.  If there is 
-          a legal move in that direction, put it in the moves ArrayList.
-          */
 
                 if (moves.size() == 0) {
                     for (int row = 0; row < 8; row++) {
@@ -477,8 +469,8 @@ public class WorkingCheckers extends JPanel {
                     }
                 }
          
-         /* If no legal moves have been found, return null.  Otherwise, create
-          an array just big enough to hold all the legal moves, copy the
+         /* return null if no legal moves are found.
+         else, create an array big enough to hold all the legal moves, copy the
           legal moves from the ArrayList into the array, and return the array. */
 
                 if (moves.size() == 0)
@@ -490,7 +482,7 @@ public class WorkingCheckers extends JPanel {
                     return moveArray;
                 }
 
-            }  // end getLegalMoves
+            }
 
 
             /**
