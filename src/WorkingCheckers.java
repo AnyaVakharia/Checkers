@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 /** Description: This application allows for users to play a checkers game
  *          against each other. Users are able to choose which checkers
- *          they desire to move wherever on the board. R
+ *          they desire to move wherever on the board. When users press
+ *          the "resign" button, a winner is given no matter how far along
+ *          the game is.
  *
  *
  */
