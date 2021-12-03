@@ -133,7 +133,7 @@ public class WorkingCheckers extends JPanel {
             currentPlayer = CheckersData.RED;   // Red checker moves first
             legalMoves = board.getLegalMoves(CheckersData.RED);  // Record Red's moves
             selectedRow = -1;
-            message.setText("Red:  Make your move.");
+            message.setText("Red's Turn");
             gameInProgress = true;
             newGameButton.setEnabled(false);
             resignButton.setEnabled(true);
@@ -148,9 +148,9 @@ public class WorkingCheckers extends JPanel {
                 return;
             }
             if (currentPlayer == CheckersData.RED)
-                gameOver("RED resigns.  BLACK wins.");
+                gameOver("Black Wins!");
             else
-                gameOver("BLACK resigns.  RED wins.");
+                gameOver("Red Wins!");
         }
 
 
@@ -173,9 +173,9 @@ public class WorkingCheckers extends JPanel {
                     selectedRow = row;
                     selectedCol = col;
                     if (currentPlayer == CheckersData.RED)
-                        message.setText("RED:  Make your move.");
+                        message.setText("Red's Turn");
                     else
-                        message.setText("BLACK:  Make your move.");
+                        message.setText("Black's Turn");
                     repaint();
                     return;
                 }
@@ -195,7 +195,7 @@ public class WorkingCheckers extends JPanel {
                     return;
                 }
 
-            message.setText("Click the square you want to move to.");
+            message.setText("Click the space you want to move to.");
 
         }  // end doClickSquare()
 
@@ -210,9 +210,9 @@ public class WorkingCheckers extends JPanel {
                 legalMoves = board.getLegalJumpsFrom(currentPlayer, move.toRow, move.toCol);
                 if (legalMoves != null) {
                     if (currentPlayer == CheckersData.RED)
-                        message.setText("RED:  You must continue jumping.");
+                        message.setText("Red, You must continue jumping.");
                     else
-                        message.setText("BLACK:  You must continue jumping.");
+                        message.setText("Black, You must continue jumping.");
                     selectedRow = move.toRow;
                     selectedCol = move.toCol;
                     repaint();
@@ -224,20 +224,20 @@ public class WorkingCheckers extends JPanel {
                 currentPlayer = CheckersData.BLACK;
                 legalMoves = board.getLegalMoves(currentPlayer);
                 if (legalMoves == null)
-                    gameOver("BLACK has no moves.  RED wins.");
+                    gameOver("Red Wins!");
                 else if (legalMoves[0].isJump())
-                    message.setText("BLACK:  Make your move.  You must jump.");
+                    message.setText("Black's turn, You must jump.");
                 else
-                    message.setText("BLACK:  Make your move.");
+                    message.setText("Black's Turn");
             } else {
                 currentPlayer = CheckersData.RED;
                 legalMoves = board.getLegalMoves(currentPlayer);
                 if (legalMoves == null)
-                    gameOver("RED has no moves.  BLACK wins.");
+                    gameOver("Black Wins!");
                 else if (legalMoves[0].isJump())
-                    message.setText("RED:  Make your move.  You must jump.");
+                    message.setText("Red's Turn, You must jump.");
                 else
-                    message.setText("RED:  Make your move.");
+                    message.setText("Red's Turn");
             }
 
             // -1 if the player has not selected a move
