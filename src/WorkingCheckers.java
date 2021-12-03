@@ -101,7 +101,7 @@ public class WorkingCheckers extends JPanel {
         Board() {
             setBackground(Color.BLACK);
             addMouseListener(this);
-            resignButton = new JButton("Resign");
+            resignButton = new JButton("End Game");
             resignButton.addActionListener(this);
             newGameButton = new JButton("New Game");
             newGameButton.addActionListener(this);
